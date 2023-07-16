@@ -5,9 +5,9 @@ const { hotelIdSchemaObject, createHotelSchema, updateHotelSchema } = require(".
 
 const hotelRoutes = (app) => {
     const router = express.Router();
-    app.use("/api/reservar/v1/hotel", router);
+    app.use("/ne-reserva-habitaciones/br/servicio-al-cliente/v1", router);
 
-    router.get("/", async (req, res, next) => {
+    router.get("/listar-hoteles", async (req, res, next) => {
         try {
             const data = await getHotels();
             res.status(200).json({
@@ -19,7 +19,7 @@ const hotelRoutes = (app) => {
         }
     });
 
-    router.get("/:hotelId", validationHandler(hotelIdSchemaObject, "params"), async (req, res, next) => {
+    router.get("/detallar-hoteles/:hotelId", validationHandler(hotelIdSchemaObject, "params"), async (req, res, next) => {
         try {
             const data = await getHotel(req.params.hotelId);
             res.status(200).json({
@@ -31,7 +31,7 @@ const hotelRoutes = (app) => {
         }
     });
 
-    router.delete("/eliminar/:hotelId", validationHandler(hotelIdSchemaObject, "params"), async (req, res, next) => {
+    router.delete("/eliminar-hoteles/:hotelId", validationHandler(hotelIdSchemaObject, "params"), async (req, res, next) => {
         try {
             deleteHotel(req.params.hotelId);
             res.status(200).json({
@@ -42,7 +42,7 @@ const hotelRoutes = (app) => {
         }
     });
 
-    router.post("/crear", validationHandler(createHotelSchema), async (req, res, next) => {
+    router.post("/crear-hoteles", validationHandler(createHotelSchema), async (req, res, next) => {
         try {
             createHotel(req.body);
             res.status(200).json({
@@ -58,7 +58,7 @@ const hotelRoutes = (app) => {
     //     "valor": "<valor que sera actualizado>"
     // }
     router.put(
-        "/modificar/:hotelId",
+        "/actualizar-hoteles/:hotelId",
         validationHandler(hotelIdSchemaObject, "params"),
         validationHandler(updateHotelSchema),
         async (req, res, next) => {

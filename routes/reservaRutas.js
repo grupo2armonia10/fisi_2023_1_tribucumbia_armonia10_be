@@ -3,9 +3,9 @@ const { getReserva, getReservas, deleteReserva, createReserva, updateReserva } =
 
 const reservaRutas = (app) => {
     const router = express.Router();
-    app.use("/api/reservar/v1/reserva", router);
+    app.use("/ne-reserva-habitaciones/br/servicio-al-cliente/v1", router);
 
-    router.get("/", async (req, res, next) => {
+    router.get("/listar-reservas", async (req, res, next) => {
         try {
             const data = await getReservas();
             res.status(200).json({
@@ -17,7 +17,7 @@ const reservaRutas = (app) => {
         }
     });
 
-    router.get("/:reservaId", async (req, res, next) => {
+    router.get("/listar-reservas/:reservaId", async (req, res, next) => {
         try {
             const data = await getReserva(req.params.reservaId);
             res.status(200).json({
@@ -29,7 +29,7 @@ const reservaRutas = (app) => {
         }
     });
 
-    router.post("/crear", async (req, res, next) => {
+    router.post("/agregar-reservas", async (req, res, next) => {
         try {
             const constancia = await createReserva(req.body);
 
@@ -45,7 +45,7 @@ const reservaRutas = (app) => {
         }
     });
 
-    router.delete("/eliminar/:reservaId", async (req, res, next) => {
+    router.delete("/eliminar-reservas/:reservaId", async (req, res, next) => {
         try {
             deleteReserva(req.params.reservaId);
             res.status(200).json({
@@ -56,11 +56,11 @@ const reservaRutas = (app) => {
         }
     });
 
-    router.put("/modificar/:reservaId", async (req, res, next) => {
+    router.put("/actualizar-reservas/:reservaId", async (req, res, next) => {
         try {
             updateReserva(req.params.reservaId, req.body.columna, req.body.valor);
             res.status(200).json({
-                mensaje: "Hotel Actualizado",
+                mensaje: "Reserva Actualizado",
             });
         } catch (err) {
             console.error(err.message);

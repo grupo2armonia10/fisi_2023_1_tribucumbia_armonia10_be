@@ -1,3 +1,4 @@
+// Ignora estas rutas
 const express = require("express");
 const { getReservasHabitacion, getReservasUsuario, verificarReserva, getConstancia, getReservaId } = require("../lib/scripts");
 

@@ -2,6 +2,9 @@
 # Dependency directories
 node_modules/
 jspm_packages/
+.dockerignore
+Dockerfile
+.DS_Store
 
 # dotenv environment variable files
 .env
